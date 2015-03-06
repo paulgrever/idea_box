@@ -1,0 +1,15 @@
+<h1>Idea Details</h1>
+
+<h3>
+  <strong>Idea:</strong>
+  <%= @idea.title %>
+</h3>
+
+<p>
+  <strong>Details:</strong>
+  <%= @idea.body %>
+</p>
+
+<%= link_to 'Edit Idea', edit_idea_path(@idea) %>
+<%= link_to("Bad Idea Remover", idea_path(@idea) , method: :delete) %>
+<%= link_to 'Back', ideas_path %>
