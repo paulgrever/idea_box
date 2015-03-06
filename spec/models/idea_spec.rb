@@ -23,9 +23,4 @@ RSpec.describe Idea, type: :model do
     idea.body = nil
     expect(idea).to_not be_valid
   end
-
-  it "has an id when valid and saved" do
-    idea1 =Idea.create(title: "Dream", body: "TEXT")
-    expect(idea1.id).to eq(1)
-  end
 end
