@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Idea, type: :model do
   let(:idea) do 
-    Idea.new(title: "Dream", body: "TEXT")
+    Idea.new(title: "Dream", body: "TEXT", category_id: 1)
   end
+
 
   it "exits" do
     expect(idea).to be_valid

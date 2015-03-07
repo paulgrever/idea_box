@@ -9,7 +9,7 @@ class IdeasController < ApplicationController
   end
 
   def new
-    @idea = Idea.new(title: params[:title], body: params[:body])
+    @idea = Idea.new(title: params[:title], body: params[:body], category_id: params[:category_id])
   end
 
   def create
@@ -43,6 +43,6 @@ class IdeasController < ApplicationController
   end
 
   def idea_params
-    params.require(:idea).permit(:title, :body)
+    params.require(:idea).permit(:title, :body, :category_id)
   end
 end
