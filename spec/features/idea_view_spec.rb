@@ -1,15 +1,18 @@
 require 'rails_helper'
 
 describe "the idea view", type: :feature do
-  let(:idea) { Idea.create(title: 'Thought', body: 'filler') }
+  let(:idea) { Idea.create(title: 'Thought', body: 'filler', category_id: category.id) }
+  let(:category) {Category.create(theme: "Dreams")}
 
   it "creates a new idea" do
+    category
     visit ideas_path
     expect(page).to have_content("Idea Page")
     click_link_or_button("New Idea")
     expect(current_path).to eq(new_idea_path)
     fill_in('idea[title]', with: "Idea3")
     fill_in('idea[body]', with: "Boring Details")
+    select('Dreams', :from => "idea[category_id]")
     click_link_or_button('Create Idea')
     expect(Idea.count).to eq(1)
     expect(page).to have_content("Idea3")

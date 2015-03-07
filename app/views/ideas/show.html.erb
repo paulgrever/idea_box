@@ -10,6 +10,11 @@
   <%= @idea.body %>
 </p>
 
+<p>
+  <strong>Category:</strong>
+  <%= @idea.category.theme %>
+</p>
+
 <%= link_to 'Edit Idea', edit_idea_path(@idea) %>
 <%= link_to("Bad Idea Remover", idea_path(@idea) , method: :delete) %>
 <%= link_to 'Back', ideas_path %>

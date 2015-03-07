@@ -20,8 +20,12 @@
     <%= f.label :Details %><br>
     <%= f.text_field :body %>
   </div>
+  <div>
+  <%= f.collection_select(:category_id, Category.all, :id, :theme) %>
+  </div>
   
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
