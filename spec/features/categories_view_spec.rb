@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 describe "the category view", type: :feature do
+  before(:each) do 
+    User.create(username: 'Paul', password: 'test', role: 1)
+    visit login_path
+    fill_in('session[username]', with: 'Paul')
+    fill_in('session[password]', with: 'test')
+    click_link_or_button("Login")
+  end
   let(:category) do 
     Category.create(theme: "Future Plans")
   end

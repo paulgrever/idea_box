@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:update, :show, :edit, :destroy]
+  before_filter :redirect_unless_current_user_admin
   
   
   def index
