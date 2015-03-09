@@ -17,16 +17,19 @@
 
 <% if current_user.present? %>
   <% if current_user.admin? %>
-    <%= button_to 'Create A Category', categories_path, method: :get%>
-    <%= button_to 'View All Ideas', ideas_path, method: :get%>
+
+    <%= button_to 'Create A Category', categories_path, method: :get, class: "button", class: "admin_button"  %>
+    <%= button_to 'View All Ideas', ideas_path, method: :get, class: "button", class: "admin_button"%>
     <% User.all.each do |user| %>
-    <%= button_to "View As User #{user.id} - #{user.username}", user_path(user), method: :get%>
+    <%= button_to "View As User #{user.id} - #{user.username}", user_path(user), method: :get, class: "button", class: "admin_button" %>
     <% end %>
+    
   <% end %>
   <%="You are logged in as #{current_user.username}"  %>
   <%= button_to 'log out', logout_path, method: :delete, class: "button" %>
-  <%= button_to 'profile', user_path(current_user), method: :get %>
+  <%= button_to 'profile', user_path(current_user), method: :get, class: "button" %>
 <% end %>
+
 <%= yield %>
 
 </body>

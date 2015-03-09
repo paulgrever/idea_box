@@ -14,12 +14,10 @@ end
   helper_method :current_user
 
   def redirect_unless_current_user_admin
-    flash[:invalid_user] = "You are not authorized to access this page"
     redirect_to login_path unless current_user.admin? 
   end
 
   def redirect_unless_current_user_exists
-    flash[:login_first] = "You Must Login First"
     redirect_to login_path unless current_user.present?
     
   end

@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 describe "the idea view", type: :feature do
-  let(:idea) { Idea.create(title: 'Thought', body: 'filler', category_id: category.id) }
-  let(:category) {Category.create(theme: "Dreams")}
+  
   before(:each) do 
-    User.create(username: 'Paul', password: 'test', role: 1)
+    @user =User.create(username: 'Paul', password: 'test', role: 1)
     visit login_path
     fill_in('session[username]', with: 'Paul')
     fill_in('session[password]', with: 'test')
     click_link_or_button("Login")
   end
-
+  let(:idea) { Idea.create(title: 'Thought', body: 'filler', category_id: category.id, user_id: @user.id) }
+  let(:category) {Category.create(theme: "Dreams")}
   it "can view the index as an admin" do
     category
     idea
@@ -48,10 +48,9 @@ describe "the idea view", type: :feature do
     fill_in('idea[title]', with: "Idea3")
     fill_in('idea[body]', with: "Boring Details")
     
-    within(".actions") do 
       click_link_or_button("Update Idea")
-    end
-    expect(page).to have_content("Idea3")
+    
+    expect(page).to have_content("Boring Details")
   end
 
   it "deletes an idea" do

@@ -28,13 +28,14 @@ class IdeasController < ApplicationController
 
   def update
     if @idea.update(idea_params)
-      redirect_to ideas_path
+      redirect_to user_path(current_user)
     else
       render :edit
     end
   end
 
   def destroy
+    @idea = Idea.find(params[:id])
     @idea.destroy
     redirect_to user_path(current_user)
   end
