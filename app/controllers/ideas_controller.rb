@@ -1,5 +1,7 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :destroy, :update]
+  before_filter :redirect_unless_current_user_exists
+  before_filter :redirect_unless_current_user_admin, only: [:index]
   def index
     @ideas = Idea.all
   end
@@ -9,13 +11,13 @@ class IdeasController < ApplicationController
   end
 
   def new
-    @idea = Idea.new(title: params[:title], body: params[:body], category_id: params[:category_id])
+    @idea = Idea.new(title: params[:title], body: params[:body], category_id: params[:category_id], user_id: current_user.id)
   end
 
   def create
     @idea = Idea.new(idea_params)
     if @idea.save
-      redirect_to ideas_path
+      redirect_to user_path(current_user)
     else
       render :new
     end
@@ -34,7 +36,7 @@ class IdeasController < ApplicationController
 
   def destroy
     @idea.destroy
-    redirect_to ideas_path
+    redirect_to user_path(current_user)
   end
 
  private
@@ -43,6 +45,6 @@ class IdeasController < ApplicationController
   end
 
   def idea_params
-    params.require(:idea).permit(:title, :body, :category_id)
+    params.require(:idea).permit(:title, :body, :category_id, :user_id)
   end
 end

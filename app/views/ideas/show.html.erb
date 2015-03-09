@@ -17,4 +17,4 @@
 
 <%= link_to 'Edit Idea', edit_idea_path(@idea) %>
 <%= link_to("Bad Idea Remover", idea_path(@idea) , method: :delete) %>
-<%= link_to 'Back', ideas_path %>
+<%= link_to 'Back', user_path(current_user) %>

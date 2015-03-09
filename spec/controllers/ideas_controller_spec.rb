@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe IdeasController, type: :controller do
+  before(:each) do 
+    User.create(username: 'Paul', password: 'test', role: 1)
+    visit login_path
+    fill_in('session[username]', with: 'Paul')
+    fill_in('session[password]', with: 'test')
+    click_link_or_button("Login")
+  end
 let(:valid_attributes) {
     { title: "Title", body: 'Text' }
   }
@@ -10,29 +17,7 @@ let(:valid_attributes) {
   }
 
   let(:valid_session) { {} }
-  describe "GET #index" do
-    it "assigns all Ideas as @ideas" do
-      idea = Idea.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:ideas)).to eq([idea])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested idea as @idea" do
-      idea = Idea.create! valid_attributes
-      get :show, {:id => idea.to_param}, valid_session
-      expect(assigns(:idea)).to eq(idea)
-      expect(response.status).to eq(200)
-    end
-  end
-
-   describe "GET #new" do
-    it "assigns a new idea as @idea" do
-      get :new, {}, valid_session
-      expect(assigns(:idea)).to be_a_new(Idea)
-    end
-  end
+  
 
   
 end

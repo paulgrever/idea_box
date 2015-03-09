@@ -23,6 +23,10 @@
   <div>
   <%= f.collection_select(:category_id, Category.all, :id, :theme) %>
   </div>
+
+   <div class="field">
+    <%= f.hidden_field :user_id %>
+  </div>
   
   <div class="actions">
     <%= f.submit %>
