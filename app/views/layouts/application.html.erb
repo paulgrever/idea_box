@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IdeaBox</title>
+  <title>The Idea Collector</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -13,9 +13,19 @@
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
+
+
 <% if current_user.present? %>
-<%="You are logged in as #{current_user.username}"  %>
-<%= button_to 'log out', logout_path, method: :delete, class: "button" %>
+  <% if current_user.admin? %>
+    <%= button_to 'Create A Category', categories_path, method: :get%>
+    <%= button_to 'View All Ideas', ideas_path, method: :get%>
+    <% User.all.each do |user| %>
+    <%= button_to "View As User #{user.id} - #{user.username}", user_path(user), method: :get%>
+    <% end %>
+  <% end %>
+  <%="You are logged in as #{current_user.username}"  %>
+  <%= button_to 'log out', logout_path, method: :delete, class: "button" %>
+  <%= button_to 'profile', user_path(current_user), method: :get %>
 <% end %>
 <%= yield %>
 
